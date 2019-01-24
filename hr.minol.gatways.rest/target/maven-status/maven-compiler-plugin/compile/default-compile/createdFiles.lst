@@ -1,0 +1,15 @@
+de\minol\gatways\rest\spring\boot\model\Empfang.class
+de\minol\gatways\rest\spring\boot\model\LedStatus.class
+de\minol\gatways\rest\spring\boot\model\Lage.class
+de\minol\gatways\rest\spring\boot\model\FormBlattZwei.class
+de\minol\gatways\rest\spring\boot\model\Bausubstanz.class
+de\minol\gatways\rest\spring\boot\repository\FormBlattZweiRepository.class
+de\minol\gatways\rest\spring\boot\model\Geschloss.class
+de\minol\gatways\rest\spring\boot\model\FormBlattEins.class
+de\minol\gatways\rest\spring\boot\repository\FormBlattEinsRepository.class
+de\minol\gatways\rest\spring\boot\model\Montageort.class
+de\minol\gatways\rest\spring\boot\controller\BlattController.class
+de\minol\gatways\rest\spring\boot\MinolGatwaysSpringBootApp.class
+de\minol\gatways\rest\spring\boot\model\MontagePositionRaum.class
+de\minol\gatways\rest\spring\boot\security\SecurityConfig.class
+de\minol\gatways\rest\spring\boot\service\BlattService.class

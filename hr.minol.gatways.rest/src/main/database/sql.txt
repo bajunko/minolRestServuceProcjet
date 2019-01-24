@@ -1,0 +1,82 @@
+create table minol.FORMBLATTEINS(
+    ID  serial PRIMARY KEY,
+    ORDNUNGSNUMMER character varying(100),
+	ADRESSEDESOBJEKTES character varying(100),
+	LGNR character varying(100),
+	ANSPRECHPERSON character varying(100),
+	TELNRANSPRECHENPERSON character varying(100),
+	MOBILFUNKVERBINDUNGVORHANDEN boolean,
+	BEGEHUNGSDATUM timestamp ,
+	BAUSUBSTANZ character varying(20),
+	AUFTRAGSNUMMER character varying(20),
+	AUSSENBEREICHVORDERSEITE character varying(20),
+	AUSSENBEREICHHINTERSEITE character varying(20),
+	AUSSENBEREICHLINKESEITE character varying(20),
+	AUSSENBEREICHRECHTESEITE character varying(20),
+	INNENBEREICHEINGANGLINKSOBEN character varying(20),
+	INNENBEREICHEINGANGMITTIGOBEN character varying(20),
+	INNENBEREICHEINGANGRECHTSOBEN character varying(20),
+	INNENBEREICHEINGANGLINKSUNTEN character varying(20),
+	INNENBEREICHEINGANGMITTIGUNTEN character varying(20),
+	INNENBEREICHEINGANGRECHTSUNTEN character varying(20),
+	WEITEREMESSSTELLENHEIZRAUM character varying(20),
+	WEITEREMESSSTELLENWASCHKUCHE character varying(20),
+	WEITEREMESSSTELLENANDERES1 character varying(20),
+	WEITEREMESSSTELLEN1 character varying(100),
+	WEITEREMESSSTELLENANDERES2 character varying(20),
+	WEITEREMESSSTELLEN2 character varying(100),
+	WEITEREMESSSTELLENANDERES3 character varying(20),
+	WEITEREMESSSTELLEN3 character varying(100),
+	WEITEREMESSSTELLENANDERES4 character varying(20),
+	WEITEREMESSSTELLEN4 character varying(100),
+	MONTAGEORTDESGATEWAYSADRESSE character varying(100),
+	MONTAGEORTDESGATEWAYSHAUSNUMMER character varying(100),
+	MONTAGEORTDESGATEWAYSRAUMBEZEICHUNG character varying(100),
+	STECKDOSEBEREITSVORHANDEN boolean,
+	BOHRSCHABLONEANGEBRACT boolean,
+	STARTDATUM timestamp 
+);
+
+
+create table minol.FORMBLATTZWEI(
+
+
+		ID serial PRIMARY KEY,
+		ORDUNGSNUMMER character varying(100),
+	    AUFTRAGSNUMER character varying(100),
+		LGNRGATEWAY character varying(100),
+		PLZ character varying(100),
+		ORT character varying(100),
+		STRASSE character varying(100),
+		MONTAGEDATUM character varying(100),
+		SERVICEPARTNERNR character varying(100),
+		UNTERSCHIFTSERVICEPARTNER character varying(100),
+		BEMERKUNGENZURMONTAGE character varying(100),
+		BEIHYBRIDINSTALLATIONLFDNRDESGATEWAYS character varying(100),
+		BEIHYBRIDINSTALLATIONLMONTAGEPOSITIONDERANTENNE character varying(100),
+		BEIHYBRIDINSTALLATIONSONSTIGEBEMERKUNG character varying(100),
+		STARTDATUM timestamp 
+		);
+		
+create table minol.BLATTZWEILTDNR(
+
+
+		ID serial,
+		FORMBLATTZWEI_ID int not null ,
+		LTDNR character varying(100),
+		GATEWAYNUMMERALT character varying(100),
+		GATEWAYNUMMERNEU character varying(100),
+		ABWANSCRIFTHAUSEINGANG character varying(100),
+		GESCHLOSS character varying(20),
+		LAGE character varying(20),
+		MONTAGEPOSITIONRAUM character varying(20),
+		MONTAGEORT character varying(20),
+		POWER character varying(20),
+		LORA character varying(20),
+		USB character varying(20),
+		SAPNR character varying(100),
+		
+		 PRIMARY KEY (ID),
+		 FOREIGN KEY(FORMBLATTZWEI_ID) REFERENCES minol.formblattzwei(id) ON DELETE CASCADE
+		
+		);
