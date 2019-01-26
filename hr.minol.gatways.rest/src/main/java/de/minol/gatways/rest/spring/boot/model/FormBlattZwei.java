@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-@Entity(name = "Formblattzwei")
+@Entity(name = "blatt")
 public class FormBlattZwei {
 
 private final static String descriptionGatewayNummer = "MAC Addresse nur vollstandig eintragen";
