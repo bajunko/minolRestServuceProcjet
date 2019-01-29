@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -94,6 +95,10 @@ public class FormBlattEins {
 	@Column(name = "startdatum")
 	@Temporal( TemporalType.TIMESTAMP)
 	private Date startdatum;
+	@Lob
+    @Column(name="pic")
+	@org.hibernate.annotations.Type(type="org.hibernate.type.BinaryType")
+    private byte[] pic;
 	
 	
 	public long getId() {
@@ -320,6 +325,12 @@ public class FormBlattEins {
 	}
 	public void setStartdatum(Date startdatum) {
 		this.startdatum = startdatum;
+	}
+	public byte[] getPic() {
+		return pic;
+	}
+	public void setPic(byte[] pic) {
+		this.pic = pic;
 	}
 
 }

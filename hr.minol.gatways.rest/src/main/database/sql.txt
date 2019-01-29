@@ -35,7 +35,8 @@ create table minol.FORMBLATTEINS(
 	USERNAME character varying(100),
 	STECKDOSEBEREITSVORHANDEN boolean,
 	BOHRSCHABLONEANGEBRACT boolean,
-	STARTDATUM timestamp 
+	STARTDATUM timestamp,
+	pic BYTEA 
 );
 
 

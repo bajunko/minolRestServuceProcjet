@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +54,12 @@ public class BlattController {
 	}
 
 	@RequestMapping(value = "/neuBlattEins", method = RequestMethod.POST)
-	public int insertBlattEins(@RequestBody FormBlattEins blattEins) {
+	public int insertBlattEins(@RequestBody FormBlattEins blattEins) throws IOException {
+		ClassPathResource backImgFile = new ClassPathResource("image/comprapair.jpg");
+		byte[] arrayPic = new byte[(int) backImgFile.contentLength()];
+		backImgFile.getInputStream().read(arrayPic);
+		blattEins.setPic(arrayPic);
+	//	ImageModel blackImage = new ImageModel(1, "JSA-ABOUT-IMAGE-BLACK-BACKGROUND", "png", arrayPic);
 		return blattService.addBlattEins(blattEins) ? HttpStatus.SC_CREATED : HttpStatus.SC_BAD_REQUEST;
 	}
 	
@@ -173,6 +179,32 @@ public class BlattController {
 // 
 //        
 //    }
+	
+	
+//	@RequestMapping(value = "/image-manual-response", method = RequestMethod.GET)
+//	public void getImageAsByteArray(HttpServletResponse response) throws IOException {
+//		FormBlattEins blattEinsbyId = blattEinsbyId(2);
+//	    InputStream in = blattEinsbyId.getPic();
+//	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+//	    IOUtils.copy(in, response.getOutputStream());
+//	}
+	
+	@GetMapping(value = "/image")
+    public ResponseEntity<InputStreamResource> imageDownload() throws IOException {
+ 
+		FormBlattEins blattEinsbyId = blattEinsbyId(3);
+		ByteArrayInputStream bis = new ByteArrayInputStream( blattEinsbyId.getPic());
+ 
+        org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=image.png");
+ 
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.IMAGE_PNG)
+                .body(new InputStreamResource(bis));
+    }
+	
 
 
 }
