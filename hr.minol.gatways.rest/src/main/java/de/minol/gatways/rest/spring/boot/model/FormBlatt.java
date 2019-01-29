@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-@Entity(name = "formblatt")
+@Entity(name = "Formblatt")
 public class FormBlatt {
 
 private final static String descriptionGatewayNummer = "MAC Addresse nur vollstandig eintragen";
@@ -99,8 +99,7 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	@Column(name = "username")
 	private boolean username;
 	
-    @Column(name = "ordungsnummer")
-    private String ordungsnummer;
+   
 	@Column(name = "auftragsnumer")
     private String auftragsNumer;
 	@Column(name = "lgnrgateway")
@@ -134,8 +133,8 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 //	@OneToMany(targetEntity=BlattZweiLtdnr.class, mappedBy = "formBlattZwei", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
 //	private List<BlattZweiLtdnr> ltdnr;
 	
-	@OneToMany(mappedBy = "formBlattZwei", cascade = CascadeType.ALL)
-	private Set<BlattZweiLtdnr> ltdnr;
+	@OneToMany(mappedBy = "formBlatt", cascade = CascadeType.ALL)
+	private Set<BlattLtdnr> ltdnr;
 	
 //    public Set<BlattZweiLtdnr> getLtdnr() {
 //        return ltdnr;
@@ -150,12 +149,7 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	
 	
 	
-	public String getOrdungsnummer() {
-		return ordungsnummer;
-	}
-	public void setOrdungsnummer(String ordungsnummer) {
-		this.ordungsnummer = ordungsnummer;
-	}
+	
 	public String getAuftragsNumer() {
 		return auftragsNumer;
 	}
@@ -237,12 +231,7 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Set<BlattZweiLtdnr> getLtdnr() {
-		return ltdnr;
-	}
-	public void setLtdnr(Set<BlattZweiLtdnr> ltdnr) {
-		this.ltdnr = ltdnr;
-	}
+	
 //	public List<BlattZweiLtdnr> getLtdnr() {
 //		return ltdnr;
 //	}
@@ -463,6 +452,12 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	}
 	public void setWeitereMessstellen4(String weitereMessstellen4) {
 		this.weitereMessstellen4 = weitereMessstellen4;
+	}
+	public Set<BlattLtdnr> getLtdnr() {
+		return ltdnr;
+	}
+	public void setLtdnr(Set<BlattLtdnr> ltdnr) {
+		this.ltdnr = ltdnr;
 	}
 	
 }

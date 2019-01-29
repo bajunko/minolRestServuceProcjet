@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.minol.gatways.rest.spring.boot.model.BlattZweiLtdnr;
+import de.minol.gatways.rest.spring.boot.model.FormBlatt;
 import de.minol.gatways.rest.spring.boot.model.FormBlattEins;
 import de.minol.gatways.rest.spring.boot.model.FormBlattZwei;
 import de.minol.gatways.rest.spring.boot.pdf.ExcelGenerator;
+import de.minol.gatways.rest.spring.boot.pdf.PDFBlattGenerator;
 import de.minol.gatways.rest.spring.boot.pdf.PDFGenerator;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattEinsRepository;
+import de.minol.gatways.rest.spring.boot.repository.FormBlattRepository;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattZweiRepository;
 import de.minol.gatways.rest.spring.boot.service.BlattService;
 
@@ -35,6 +37,8 @@ public class BlattController {
 	FormBlattEinsRepository formBlattEinsRepository;
 	@Autowired
 	FormBlattZweiRepository formBlattZweiRepository;
+	@Autowired
+	FormBlattRepository formBlattRepository;
 	@Autowired
 	BlattService blattService;
 	
@@ -55,10 +59,10 @@ public class BlattController {
 
 	@RequestMapping(value = "/neuBlattEins", method = RequestMethod.POST)
 	public int insertBlattEins(@RequestBody FormBlattEins blattEins) throws IOException {
-		ClassPathResource backImgFile = new ClassPathResource("image/comprapair.jpg");
-		byte[] arrayPic = new byte[(int) backImgFile.contentLength()];
-		backImgFile.getInputStream().read(arrayPic);
-		blattEins.setPic(arrayPic);
+//		ClassPathResource backImgFile = new ClassPathResource("image/comprapair.jpg");
+//		byte[] arrayPic = new byte[(int) backImgFile.contentLength()];
+//		backImgFile.getInputStream().read(arrayPic);
+//		blattEins.setPic(arrayPic);
 	//	ImageModel blackImage = new ImageModel(1, "JSA-ABOUT-IMAGE-BLACK-BACKGROUND", "png", arrayPic);
 		return blattService.addBlattEins(blattEins) ? HttpStatus.SC_CREATED : HttpStatus.SC_BAD_REQUEST;
 	}
@@ -206,5 +210,67 @@ public class BlattController {
     }
 	
 
+	// Ispod su REST za spojen modele Blatt1 i Blatt2:
+	
+	@RequestMapping(value = "/neuBlatt", method = RequestMethod.POST)
+	public int insertBlatt(@RequestBody FormBlatt blatt) throws IOException {
+//		ClassPathResource backImgFile = new ClassPathResource("image/comprapair.jpg");
+//		byte[] arrayPic = new byte[(int) backImgFile.contentLength()];
+//		backImgFile.getInputStream().read(arrayPic);
+//		blattEins.setPic(arrayPic);
+	//	ImageModel blackImage = new ImageModel(1, "JSA-ABOUT-IMAGE-BLACK-BACKGROUND", "png", arrayPic);
+		return blattService.addBlatt(blatt) ? HttpStatus.SC_CREATED : HttpStatus.SC_BAD_REQUEST;
+	}
+	
+	@RequestMapping(value = "/neuBlattPdf", method = RequestMethod.POST)
+	public ResponseEntity<InputStreamResource> insertBlattPdf(@RequestBody FormBlatt blatt) {
+		
+		blattService.addBlatt(blatt);
+		
+		try {
+			return blattReport(blatt);
+		} catch (IOException e) {
+			System.out.println("Gresko prilikom gereranja pdf");
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
+	@GetMapping(value = "blatt/pdf",
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> blattReport(FormBlatt eins) throws IOException {
+        List<FormBlatt> customers = (List<FormBlatt>) formBlattRepository.findAll();
+ 
+        List<FormBlatt> einsList = new ArrayList<>();
+        einsList.add(eins);
+        ByteArrayInputStream bis = PDFBlattGenerator.blattPDFReport(einsList);
+ 
+        org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=customers.pdf");
+ 
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
+	
+	
+	@GetMapping("/blatt")
+	public List<FormBlatt> allBlatt(){
+		return (List<FormBlatt>) formBlattRepository.findAll();
+	}
+	
+	@GetMapping("/blatt/{id}")
+	public FormBlatt blattbyId(@PathVariable long id){
+		return  formBlattRepository.findOne(id);
+	}
+	
+	@DeleteMapping(value = "/deleteBlatt/{id}" )
+	public void deleteBlatt(@PathVariable long id ) {
+		formBlattRepository.delete(id);
+	}
+	
 
 }
