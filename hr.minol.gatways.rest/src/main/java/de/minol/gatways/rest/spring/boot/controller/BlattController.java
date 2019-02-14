@@ -25,6 +25,7 @@ import de.minol.gatways.rest.spring.boot.model.FormBlattZwei;
 import de.minol.gatways.rest.spring.boot.pdf.ExcelGenerator;
 import de.minol.gatways.rest.spring.boot.pdf.PDFBlattGenerator;
 import de.minol.gatways.rest.spring.boot.pdf.PDFGenerator;
+import de.minol.gatways.rest.spring.boot.pdf.ReportFactory;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattEinsRepository;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattRepository;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattZweiRepository;
@@ -41,10 +42,12 @@ public class BlattController {
 	FormBlattRepository formBlattRepository;
 	@Autowired
 	BlattService blattService;
+	@Autowired
+	ReportFactory reportFactorry;
 	
 	@RequestMapping("/")
 	public String healthCheck()	{
-		return "REST radi ok";
+		return "REST radi ok - verzija PDF";
 	}
 	
 	@GetMapping("/blattEins")
@@ -228,7 +231,7 @@ public class BlattController {
 		blattService.addBlatt(blatt);
 		
 		try {
-			return blattReport(blatt);
+			return blattReportJasper(blatt);
 		} catch (IOException e) {
 			System.out.println("Gresko prilikom gereranja pdf");
 			e.printStackTrace();
@@ -244,7 +247,7 @@ public class BlattController {
  
         List<FormBlatt> einsList = new ArrayList<>();
         einsList.add(eins);
-        ByteArrayInputStream bis = PDFBlattGenerator.blattPDFReport(einsList);
+        ByteArrayInputStream bis = PDFBlattGenerator.blattPDFReport(customers);
  
         org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=customers.pdf");
@@ -271,6 +274,40 @@ public class BlattController {
 	public void deleteBlatt(@PathVariable long id ) {
 		formBlattRepository.delete(id);
 	}
+	
+	
+	
+	
+	//Primjer sa Jasper Reportom
+	@GetMapping(value = "blattjasper/pdf",
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> blattReportJasper(FormBlatt eins) throws IOException {
+        // FormBlatt findOne = formBlattRepository.findOne(new Long(8));
+ 
+        
+       
+        byte[] printReport = reportFactorry.printReport(eins);
+        ByteArrayInputStream bisJasper = new ByteArrayInputStream(printReport);
+ 
+        org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=customers.pdf");
+ 
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bisJasper));
+    }
+
+	public ReportFactory getReportFactorry() {
+		return reportFactorry;
+	}
+
+	public void setReportFactorry(ReportFactory reportFactorry) {
+		this.reportFactorry = reportFactorry;
+	}
+	
+	
 	
 
 }

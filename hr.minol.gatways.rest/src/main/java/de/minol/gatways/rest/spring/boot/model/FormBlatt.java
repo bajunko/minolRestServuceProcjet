@@ -25,6 +25,8 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+    @Column(name = "macadresseblatt1")
+	private String macAdresseBlatt1;
     @Column(name = "adressedesobjektes")
 	private String adresseDesObjektes;
 	@Column(name = "lgnr")
@@ -458,6 +460,12 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	}
 	public void setLtdnr(Set<BlattLtdnr> ltdnr) {
 		this.ltdnr = ltdnr;
+	}
+	public String getMacAdresseBlatt1() {
+		return macAdresseBlatt1;
+	}
+	public void setMacAdresseBlatt1(String macAdresseBlatt1) {
+		this.macAdresseBlatt1 = macAdresseBlatt1;
 	}
 	
 }

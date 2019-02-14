@@ -1,10 +1,10 @@
 package de.minol.gatways.rest.spring.boot.model;
 
 public enum Geschloss {
-	UG("UG", ""),
-	EG("EG", ""),
-	ERSTE_OG("OG", ""),
-	DG("DG", "");
+	UG("UG", "UG"),
+	EG("EG", "EG"),
+	ERSTE_OG("OG", "ERSTE OG"),
+	DG("DG", "DG");
 	
 	private String sifra;
 	private String opis;
