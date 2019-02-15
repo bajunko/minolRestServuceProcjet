@@ -3,7 +3,6 @@ C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\pdf\model\IspisBlatt.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\pdf\ReportFactory.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\MinolGatwaysSpringBootApp.java
-C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\pdf\PDFBlattGenerator.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\repository\BlattZweiLtdnrRepository.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\model\Empfang.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\repository\BlattLtdnrRepository.java
@@ -19,7 +18,6 @@ C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\pdf\ExcelGenerator.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\service\BlattService.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\model\Lage.java
-C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\pdf\PDFGenerator.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\model\Montageort.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\model\BlattLtdnr.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\repository\FormBlattEinsRepository.java

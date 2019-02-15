@@ -2,7 +2,7 @@ package de.minol.gatways.rest.spring.boot.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpStatus;
@@ -23,8 +23,6 @@ import de.minol.gatways.rest.spring.boot.model.FormBlatt;
 import de.minol.gatways.rest.spring.boot.model.FormBlattEins;
 import de.minol.gatways.rest.spring.boot.model.FormBlattZwei;
 import de.minol.gatways.rest.spring.boot.pdf.ExcelGenerator;
-import de.minol.gatways.rest.spring.boot.pdf.PDFBlattGenerator;
-import de.minol.gatways.rest.spring.boot.pdf.PDFGenerator;
 import de.minol.gatways.rest.spring.boot.pdf.ReportFactory;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattEinsRepository;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattRepository;
@@ -70,20 +68,7 @@ public class BlattController {
 		return blattService.addBlattEins(blattEins) ? HttpStatus.SC_CREATED : HttpStatus.SC_BAD_REQUEST;
 	}
 	
-	@RequestMapping(value = "/neuBlattEinsPdf", method = RequestMethod.POST)
-	public ResponseEntity<InputStreamResource> insertBlattEinsPdf(@RequestBody FormBlattEins blattEins) {
-		
-		blattService.addBlattEins(blattEins);
-		
-		try {
-			return customersReport(blattEins);
-		} catch (IOException e) {
-			System.out.println("Gresko prilikom gereranja pdf");
-			e.printStackTrace();
-		}
-		return null;
-		
-	}
+	
 	
 	
 	@GetMapping("/blattZwei")
@@ -133,24 +118,7 @@ public class BlattController {
 	                .body(new InputStreamResource(in));
     }
 	
-	@GetMapping(value = "/api/pdf",
-            produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> customersReport(FormBlattEins eins) throws IOException {
-        List<FormBlattEins> customers = (List<FormBlattEins>) formBlattEinsRepository.findAll();
- 
-        List<FormBlattEins> einsList = new ArrayList<>();
-        einsList.add(eins);
-        ByteArrayInputStream bis = PDFGenerator.customerPDFReport(einsList);
- 
-        org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=customers.pdf");
- 
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(bis));
-    }
+	
 	
 	
 //	@GetMapping(value = "/api/pdf",
@@ -240,24 +208,7 @@ public class BlattController {
 		
 	}
 	
-	@GetMapping(value = "blatt/pdf",
-            produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> blattReport(FormBlatt eins) throws IOException {
-        List<FormBlatt> customers = (List<FormBlatt>) formBlattRepository.findAll();
- 
-        List<FormBlatt> einsList = new ArrayList<>();
-        einsList.add(eins);
-        ByteArrayInputStream bis = PDFBlattGenerator.blattPDFReport(customers);
- 
-        org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=customers.pdf");
- 
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(bis));
-    }
+	
 	
 	
 	@GetMapping("/blatt")
@@ -279,18 +230,20 @@ public class BlattController {
 	
 	
 	//Primjer sa Jasper Reportom
-	@GetMapping(value = "blattjasper/pdf",
+	@GetMapping(value = "blattjasperpdf",
             produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> blattReportJasper(FormBlatt eins) throws IOException {
-        // FormBlatt findOne = formBlattRepository.findOne(new Long(8));
+         //FormBlatt findOne = formBlattRepository.findOne(new Long(1));
  
         
-       
+        
         byte[] printReport = reportFactorry.printReport(eins);
         ByteArrayInputStream bisJasper = new ByteArrayInputStream(printReport);
+        Long timestamp = new Date().getTime();
+        String nazivFilla = "Blatt_" + timestamp.toString();
  
         org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=customers.pdf");
+        headers.add("Content-Disposition", "inline; filename="+ nazivFilla + ".pdf");
  
         return ResponseEntity
                 .ok()

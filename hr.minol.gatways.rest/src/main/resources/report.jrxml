@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14b52e31-04a3-41a1-9800-1d5f03d2f243">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="631"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="blatt" class="de.minol.gatways.rest.spring.boot.pdf.model.IspisBlatt"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Ante\\Razvoj\\Java\\MinolGatewaysRest\\git\\minolRestServuceProcjet\\hr.minol.gatways.rest\\src\\main\\resources\\"]]></defaultValueExpression>
@@ -28,7 +28,7 @@
 			</textField>
 			<image>
 				<reportElement x="580" y="1" width="222" height="45" uuid="38ba4d7e-24af-486e-a172-cd537fb98b7a"/>
-				<imageExpression><![CDATA["C:\\Users\\Ante\\Desktop\\Minol projekt\\rsz_minol.gif"]]></imageExpression>
+				<imageExpression><![CDATA["image/rsz_minol.gif"]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>
@@ -41,13 +41,6 @@
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{blatt}.getAdresseDesObjektes()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="41" width="292" height="15" uuid="b78a4785-2113-4952-8b42-496f43701931"/>
-				<box leftPadding="2" bottomPadding="2"/>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
-				</textElement>
 			</textField>
 			<textField>
 				<reportElement x="0" y="56" width="292" height="15" uuid="cac2db4a-cc77-419f-acf6-97cc013f525e"/>

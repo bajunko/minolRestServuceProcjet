@@ -84,7 +84,7 @@ create table minol.BLATTZWEILTDNR(
 		);
 		
 		
-	// Model za jednu tablicu gdje su spojeni blatt1 i blatt2	
+	/* Model za jednu tablicu gdje su spojeni blatt1 i blatt2	*/
 	create table minol.FORMBLATT(
     ID  serial PRIMARY KEY,
     MACADRESSEBLATT1 character varying(100),
@@ -131,7 +131,7 @@ create table minol.BLATTZWEILTDNR(
 		PLZ character varying(100),
 		ORT character varying(100),
 		STRASSE character varying(100),
-		MONTAGEDATUM timestamp,
+		MONTAGEDATUM character varying(100),
 		SERVICEPARTNERNR character varying(100),
 		UNTERSCHIFTSERVICEPARTNER character varying(100),
 		BEMERKUNGENZURMONTAGE character varying(100),
