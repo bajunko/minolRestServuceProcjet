@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.NumberUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.poi.util.StringUtil;
+
 import de.minol.gatways.rest.spring.boot.model.BlattLtdnr;
 import de.minol.gatways.rest.spring.boot.model.FormBlatt;
 
@@ -124,7 +128,13 @@ public class IspisBlatt {
 		this.plz = "PLZ: " + formatiranjePropertija( blatt.getPlz());
 		this.ort = "Ort: " + formatiranjePropertija( blatt.getOrt());
 		this.strasse = "Straße: " + formatiranjePropertija( blatt.getStrasse());
-		this.montageDatum = "Montagedatum: " + formatiranjeDatuma( new Date( formatiranjeStringLongDatum(blatt.getMontageDatum())));//Long.parseLong(blatt.getMontageDatum())));
+		
+		if(isLongIzBaze(blatt.getMontageDatum())) {
+			this.montageDatum = "Montagedatum: " + formatiranjeDatuma( new Date( formatiranjeStringLongDatum(blatt.getMontageDatum())));//Long.parseLong(blatt.getMontageDatum())));
+		}else {
+			this.montageDatum = "Montagedatum: " ;
+		}
+		
 		this.servicePartnerNr = "Servicepartner Nr: " + formatiranjePropertija( blatt.getServicePartnerNr());
 		
 //		private String unterschiftServicePartner; -  staviti username kosinika
@@ -139,7 +149,7 @@ public class IspisBlatt {
 //		private Date startdatum;
 		this.startdatum = "Datum der Eingabe: " + formatiranjeDatuma(blatt.getStartdatum());
 		
-		this.blattLtdnr = new ArrayList<>( blatt.getLtdnr());
+		this.blattLtdnr = blatt.getLtdnr() != null ? new ArrayList<>( blatt.getLtdnr()) : new ArrayList<BlattLtdnr>();
 		this.ispisLtdnr = pripremiListuLtdnrZaIspis(this.blattLtdnr);
 		
 	}
@@ -158,16 +168,23 @@ public class IspisBlatt {
 
 	//Datum primimo ako je 1970 znači da je metoda za formatiranje datum iz string bacila number exception
 	//pa smo onda vratili new Date(0)
+	// Ako dobije null - tj nismo nista unjeli na polja datuma vrtimo prazan string ""
 	private String formatiranjeDatuma(Date time) {
 		// TODO Auto-generated method stub
-		String year = dateFormatYear.format(time);
-		if(year.contains("1970")) {
-			return "";
+		if(time != null) {
 			
+			String year = dateFormatYear.format(time);
+			if(year.contains("1970")) {
+				return "";
+				
+			}else {
+				Date datum = time != null ? time : new Date();
+				return dateFormat.format(datum);
+			}
 		}else {
-			Date datum = time != null ? time : new Date();
-			return dateFormat.format(datum);
+			return "";
 		}
+		
 		
 	}
 
@@ -193,9 +210,9 @@ public class IspisBlatt {
           // Output expected NumberFormatException.
     	  //TODO Napraviti Logging
           System.out.println("datum nije u formatu long");
+          return new Long(0);
       }
 	  
-	  return new Long(0);
 	}
 	
 	
@@ -391,6 +408,17 @@ public class IspisBlatt {
 
 	public void setIspisLtdnr(List<IspisBlattLtdnr> ispisLtdnr) {
 		this.ispisLtdnr = ispisLtdnr;
+	}
+	
+	
+	/** Provjeravamo jeli long u bazi za polje gdje je datum*/
+	private boolean isLongIzBaze (String datumIzBaze) {
+		try {
+			long l = Long.parseLong(datumIzBaze);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		    return true;
 	}
 
 
