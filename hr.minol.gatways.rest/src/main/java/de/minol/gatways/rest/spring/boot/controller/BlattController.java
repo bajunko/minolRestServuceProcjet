@@ -251,6 +251,23 @@ public class BlattController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bisJasper));
     }
+	
+	//Primjer sa Jasper Reportom
+	@GetMapping(value = "blattjasperexcel")
+	public ResponseEntity<InputStreamResource> blattReportJasperExcel(FormBlatt eins) throws IOException {
+		
+		Long timestamp = new Date().getTime();
+		String nazivFilla = "Export_" + timestamp.toString();
+		
+		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+		headers.add("Content-Disposition", "inline; filename="+ nazivFilla + ".xlsx");
+		
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+				.body(new InputStreamResource(ExcelGenerator.generateExcelReport(allBlatt())));
+	}
 
 	public ReportFactory getReportFactorry() {
 		return reportFactorry;
@@ -259,8 +276,6 @@ public class BlattController {
 	public void setReportFactorry(ReportFactory reportFactorry) {
 		this.reportFactorry = reportFactorry;
 	}
-	
-	
 	
 
 }

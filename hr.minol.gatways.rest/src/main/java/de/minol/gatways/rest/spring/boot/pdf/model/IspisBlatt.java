@@ -106,7 +106,7 @@ public class IspisBlatt {
 		this.weitereMessstellenAnderes1 = formatiranjePropertija( blatt.getWeitereMessstellenAnderes1() != null ? blatt.getWeitereMessstellenAnderes1().getOpis() : "");
 		this.weitereMessstellen1 = formatiranjePropertija(blatt.getWeitereMessstellen1()) + ": " + getWeitereMessstellenAnderes1();
 		this.weitereMessstellenAnderes2 = formatiranjePropertija( blatt.getWeitereMessstellenAnderes2() != null ? blatt.getWeitereMessstellenAnderes2().getOpis() : "");
-		this.weitereMessstellen2 = formatiranjePropertija(blatt.getWeitereMessstellen1()) + ": " + getWeitereMessstellenAnderes1();
+		this.weitereMessstellen2 = formatiranjePropertija(blatt.getWeitereMessstellen2()) + ": " + getWeitereMessstellenAnderes2();
 		this.weitereMessstellenAnderes3 = formatiranjePropertija( blatt.getWeitereMessstellenAnderes3() != null ? blatt.getWeitereMessstellenAnderes3().getOpis() : "");
 		this.weitereMessstellen3 = formatiranjePropertija(blatt.getWeitereMessstellen3()) + ": " + getWeitereMessstellenAnderes3();
 		this.weitereMessstellenAnderes4 = formatiranjePropertija( blatt.getWeitereMessstellenAnderes4() != null ? blatt.getWeitereMessstellenAnderes4().getOpis() : "");
