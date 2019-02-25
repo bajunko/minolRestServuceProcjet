@@ -2,6 +2,7 @@ package de.minol.gatways.rest.spring.boot.model;
 
 public enum MontagePositionRaum {
 	
+	NICHTS("", ""),
 	TREPPENHAUS("T", "Treppenhaus"),
 	DACH("D", "Dach");
 	

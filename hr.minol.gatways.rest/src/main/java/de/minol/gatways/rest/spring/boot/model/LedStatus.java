@@ -2,6 +2,7 @@ package de.minol.gatways.rest.spring.boot.model;
 
 public enum LedStatus {
 	
+	NICHTS("", ""),
 	KEINE_FUNKTION("KF", "Aus / Keine Funktion"),
 	ORANGE("OR", "Orange"),
 	GRUEN("GR", "Gruen");

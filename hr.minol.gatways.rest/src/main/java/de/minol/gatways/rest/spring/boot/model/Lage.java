@@ -2,6 +2,7 @@ package de.minol.gatways.rest.spring.boot.model;
 
 public enum Lage {
 
+	NICHTS("", ""),
 	LINKS("L", "Links"),
 	RECHTS("R", "Rechts"),
 	MITTE("M", "Mitte");

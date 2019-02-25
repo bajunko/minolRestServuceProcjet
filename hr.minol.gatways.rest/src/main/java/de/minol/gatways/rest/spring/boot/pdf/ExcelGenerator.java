@@ -3,7 +3,10 @@ package de.minol.gatways.rest.spring.boot.pdf;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -25,6 +28,7 @@ public class ExcelGenerator {
 
 	public static ByteArrayInputStream customersToExcel(List<FormBlattEins> customers) throws IOException {
 		String[] COLUMNs = { "Id", "Name", "Address", "Age" };
+		
 		try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
 			CreationHelper createHelper = workbook.getCreationHelper();
 
@@ -71,6 +75,7 @@ public class ExcelGenerator {
 
 	public static ByteArrayInputStream generateExcelReport(List<FormBlatt> allBlatt) throws IOException {
 		// Sci stupci na Blatt1
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 		List<String> columns = new ArrayList<>();
 		columns.add("MAC Adresse");
 		columns.add("Adresse Des Objektes:");
@@ -132,7 +137,7 @@ public class ExcelGenerator {
 			Row row = blatt1.createRow(rowNum++);
 			row.createCell(j++).setCellValue(blatt.getMacAdresseBlatt1());
 			row.createCell(j++).setCellValue(blatt.getAdresseDesObjektes());
-			row.createCell(j++).setCellValue(blatt.getBegehungsdatum());
+			row.createCell(j++).setCellValue(dateFormat.format( blatt.getBegehungsdatum()));
 			row.createCell(j++).setCellValue(blatt.getBausubstanz() != null ? blatt.getBausubstanz().getOpis() : "");
 			row.createCell(j++).setCellValue(blatt.getAuftragsnummer());
 
@@ -253,7 +258,7 @@ public class ExcelGenerator {
 			Row row = blatt2.createRow(rowNum++);
 			row.createCell(j++).setCellValue(blatt.getAuftragsNumer());
 			row.createCell(j++).setCellValue(blatt.getLgNrGateway());
-			row.createCell(j++).setCellValue(blatt.getMontageDatum());
+			row.createCell(j++).setCellValue(dateFormat.format( blatt.getMontageDatum()));
 			row.createCell(j++).setCellValue(blatt.getServicePartnerNr());
 			row.createCell(j++).setCellValue(blatt.getPlz());
 			row.createCell(j++).setCellValue(blatt.getOrt());

@@ -2,6 +2,7 @@ package de.minol.gatways.rest.spring.boot.model;
 
 public enum Montageort {
 	
+	NICHTS("", ""),
 	INDOOR("I", "Indoor"),
 	OUTDOOR("O", "Outdoor"),
 	HYBRID("H", "Hybrid");

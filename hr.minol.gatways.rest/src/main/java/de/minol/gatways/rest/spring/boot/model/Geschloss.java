@@ -1,6 +1,8 @@
 package de.minol.gatways.rest.spring.boot.model;
 
 public enum Geschloss {
+	
+	NICHTS("", ""),
 	UG("UG", "UG"),
 	EG("EG", "EG"),
 	ERSTE_OG("OG", "ERSTE OG"),
