@@ -1,8 +1,12 @@
 package de.minol.gatways.rest.spring.boot.pdf.model;
 
+import static ch.lambdaj.Lambda.on;
+import static ch.lambdaj.Lambda.sort;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -163,7 +167,9 @@ public class IspisBlatt {
 			 noviIspisLtdnrList.add(novi);
 		}
 		
-		return noviIspisLtdnrList;
+		List<IspisBlattLtdnr> noviIspisLtdnrListSortiran = sort( noviIspisLtdnrList, on( IspisBlattLtdnr.class ).getLtdnr() );
+		
+		return noviIspisLtdnrListSortiran;
 	}
 
 	//Datum primimo ako je 1970 znači da je metoda za formatiranje datum iz string bacila number exception

@@ -2,7 +2,7 @@ package de.minol.gatways.rest.spring.boot.pdf.model;
 
 import de.minol.gatways.rest.spring.boot.model.BlattLtdnr;
 
-public class IspisBlattLtdnr {
+public class IspisBlattLtdnr{
 	
 	private String ltdnr;
 	private String gatewaynummerAlt;
@@ -129,5 +129,4 @@ public class IspisBlattLtdnr {
 		this.sapNr = sapNr;
 	}
 	
-
 }

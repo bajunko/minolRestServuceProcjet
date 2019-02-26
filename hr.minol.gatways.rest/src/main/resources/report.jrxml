@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14b52e31-04a3-41a1-9800-1d5f03d2f243">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="653"/>
 	<parameter name="blatt" class="de.minol.gatways.rest.spring.boot.pdf.model.IspisBlatt"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Ante\\Razvoj\\Java\\MinolGatewaysRest\\git\\minolRestServuceProcjet\\hr.minol.gatways.rest\\src\\main\\resources\\"]]></defaultValueExpression>
@@ -299,7 +299,7 @@
 				<textFieldExpression><![CDATA[$P{blatt}.getMacAdresseBlatt1()]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="336" splitType="Prevent">
+		<band height="208" splitType="Prevent">
 			<textField>
 				<reportElement x="0" y="10" width="228" height="15" uuid="f2184305-989a-4301-9ed9-2c10d5f0e7df"/>
 				<box leftPadding="2" bottomPadding="2"/>
@@ -361,16 +361,10 @@
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource( $P{blatt}.getIspisLtdnr())]]></dataSourceExpression>
 				<subreportExpression><![CDATA["report_subreport1.jasper"]]></subreportExpression>
 			</subreport>
-			<textField>
-				<reportElement x="0" y="227" width="802" height="15" uuid="bd0c9ba8-5ea4-49df-b9ac-ab29f1c78f19"/>
-				<box leftPadding="2" bottomPadding="2"/>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{blatt}.getBemerkungenZurMontage()]]></textFieldExpression>
-			</textField>
+		</band>
+		<band height="130">
 			<staticText>
-				<reportElement x="0" y="253" width="176" height="18" uuid="26f8cefd-5bc0-46ea-8b81-b85f7f744582"/>
+				<reportElement x="10" y="36" width="176" height="18" uuid="f5af3964-2d6e-460a-9a1a-8f4ae1752a4b"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -383,23 +377,7 @@
 				<text><![CDATA[Bei hybrid Installation:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="271" width="802" height="15" uuid="4114174f-11d0-4575-ad76-613795a4e04e"/>
-				<box leftPadding="2" bottomPadding="2"/>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{blatt}.getBeiHybridInstallationLfdNrDesGateways()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="286" width="802" height="15" uuid="9a8686e3-d816-42a0-bded-d1f9e4795315"/>
-				<box leftPadding="2" bottomPadding="2"/>
-				<textElement verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{blatt}.getBeiHybridInstallationLMontagepositionDerAntenne()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="301" width="802" height="15" uuid="4ba15466-bc81-4902-81e5-44625a9c6079"/>
+				<reportElement x="-1" y="84" width="802" height="15" uuid="78be82ba-19e4-4fe4-b12f-6ce636034f27"/>
 				<box leftPadding="2" bottomPadding="2"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
@@ -407,12 +385,36 @@
 				<textFieldExpression><![CDATA[$P{blatt}.getBeiHybridInstallationSonstigeBemerkung()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="512" y="321" width="290" height="15" uuid="149b2181-7768-4151-9856-f1f534367c05"/>
+				<reportElement x="-1" y="69" width="802" height="15" uuid="cfbf36f7-2f1e-494b-9275-a60a0a329a7b"/>
+				<box leftPadding="2" bottomPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{blatt}.getBeiHybridInstallationLMontagepositionDerAntenne()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="511" y="104" width="290" height="15" uuid="8019944a-4f14-4d41-bb87-23fe92ead308"/>
 				<box leftPadding="2" bottomPadding="2"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{blatt}.getStartdatum()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="10" width="802" height="15" uuid="cf9e19d7-4ca9-4431-ad12-bf5a894d96df"/>
+				<box leftPadding="2" bottomPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{blatt}.getBemerkungenZurMontage()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="54" width="802" height="15" uuid="b5492170-feb1-4202-8814-eeb686fa8b4b"/>
+				<box leftPadding="2" bottomPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{blatt}.getBeiHybridInstallationLfdNrDesGateways()]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
