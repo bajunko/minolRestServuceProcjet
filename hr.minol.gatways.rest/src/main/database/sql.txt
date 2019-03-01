@@ -164,3 +164,5 @@ create table minol.BLATTLTDNR(
 		 FOREIGN KEY(FORMBLATT_ID) REFERENCES minol.formblatt(id) ON DELETE CASCADE
 		
 		);
+		
+		//Komentar
