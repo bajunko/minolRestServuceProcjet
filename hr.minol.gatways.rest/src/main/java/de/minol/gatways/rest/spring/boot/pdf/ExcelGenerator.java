@@ -1,5 +1,8 @@
 package de.minol.gatways.rest.spring.boot.pdf;
 
+import static ch.lambdaj.Lambda.on;
+import static ch.lambdaj.Lambda.sort;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,7 +15,6 @@ import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -24,9 +26,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import de.minol.gatways.rest.spring.boot.model.BlattLtdnr;
 import de.minol.gatways.rest.spring.boot.model.FormBlatt;
 import de.minol.gatways.rest.spring.boot.model.FormBlattEins;
+import de.minol.gatways.rest.spring.boot.pdf.model.IspisBlattLtdnr;
 
 public class ExcelGenerator {
-	
+
 	static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	static DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
 
@@ -84,6 +87,7 @@ public class ExcelGenerator {
 		columns.add("Begehungsdatum");
 		columns.add("Bausubstanz");
 		columns.add("Auftragsnummer");
+		columns.add("Lg. Nr.");
 
 		columns.add("Ansprechperson");
 		columns.add("TelNr\nAnsprechenperson");
@@ -116,7 +120,7 @@ public class ExcelGenerator {
 
 		Workbook excelIspis = new XSSFWorkbook();
 		Sheet blatt1 = excelIspis.createSheet("Blatt1");
-		Sheet blatt2 = excelIspis.createSheet("Blatt2");	
+		Sheet blatt2 = excelIspis.createSheet("Blatt2");
 		Font headerFont = excelIspis.createFont();
 		headerFont.setBold(true);
 		headerFont.setFontHeightInPoints((short) 12);
@@ -125,7 +129,7 @@ public class ExcelGenerator {
 		headerCellStyle.setFont(headerFont);
 
 		Row headerRow = blatt1.createRow(0);
-		headerRow.setHeight((short)1000);
+		headerRow.setHeight((short) 1000);
 
 		for (int i = 0; i < columns.size(); i++) {
 			Cell cell = headerRow.createCell(i);
@@ -143,6 +147,7 @@ public class ExcelGenerator {
 			row.createCell(j++).setCellValue(formatiranjeDatuma(blatt.getBegehungsdatum()));
 			row.createCell(j++).setCellValue(blatt.getBausubstanz() != null ? blatt.getBausubstanz().getOpis() : "");
 			row.createCell(j++).setCellValue(blatt.getAuftragsnummer());
+			row.createCell(j++).setCellValue(blatt.getLgNr());
 
 			row.createCell(j++).setCellValue(blatt.getAnsprechperson());
 			row.createCell(j++).setCellValue(blatt.getTelNrAnsprechenperson());
@@ -248,7 +253,7 @@ public class ExcelGenerator {
 		columnsBlatt2.add("Hybrid: Sonstige\nBemerkung");
 
 		Row headerRowBlatt2 = blatt2.createRow(0);
-		headerRowBlatt2.setHeight((short)1000);
+		headerRowBlatt2.setHeight((short) 1000);
 
 		for (int i = 0; i < columnsBlatt2.size(); i++) {
 			Cell cell = headerRowBlatt2.createCell(i);
@@ -262,7 +267,8 @@ public class ExcelGenerator {
 			Row row = blatt2.createRow(rowNum++);
 			row.createCell(j++).setCellValue(blatt.getAuftragsNumer());
 			row.createCell(j++).setCellValue(blatt.getLgNrGateway());
-			row.createCell(j++).setCellValue (formatiranjeDatuma( new Date(formatiranjeStringLongDatum(blatt.getMontageDatum()))));
+			row.createCell(j++)
+					.setCellValue(formatiranjeDatuma(new Date(formatiranjeStringLongDatum(blatt.getMontageDatum()))));
 			row.createCell(j++).setCellValue(blatt.getServicePartnerNr());
 			row.createCell(j++).setCellValue(blatt.getPlz());
 			row.createCell(j++).setCellValue(blatt.getOrt());
@@ -274,13 +280,15 @@ public class ExcelGenerator {
 			Set<BlattLtdnr> ltdnrList = blatt.getLtdnr();
 			if (ltdnrList.size() > 0) {
 				int loop = 0;
-				for (BlattLtdnr ltdNr : ltdnrList) {
+				List<BlattLtdnr> ltdnrListSortiran = sort( ltdnrList, on( BlattLtdnr.class ).getLtdnr() );
+				for (BlattLtdnr ltdNr : ltdnrListSortiran) {
 					if (loop > 0) {
 						row = blatt2.createRow(rowNum++);
 						row.createCell(0).setCellValue(blatt.getAuftragsNumer());
 						row.createCell(1).setCellValue(blatt.getLgNrGateway());
 						row.createCell(2);
-						row.getCell(2).setCellValue (formatiranjeDatuma( new Date(formatiranjeStringLongDatum(blatt.getMontageDatum()))));
+						row.getCell(2).setCellValue(
+								formatiranjeDatuma(new Date(formatiranjeStringLongDatum(blatt.getMontageDatum()))));
 						row.createCell(3).setCellValue(blatt.getServicePartnerNr());
 						row.createCell(4).setCellValue(blatt.getPlz());
 						row.createCell(5).setCellValue(blatt.getOrt());
@@ -321,42 +329,41 @@ public class ExcelGenerator {
 		ByteArrayInputStream bisExcel = new ByteArrayInputStream(bytes);
 		return new ByteArrayInputStream(bytes);
 	}
-	
-	//Datum primimo ako je 1970 znači da je metoda za formatiranje datum iz string bacila number exception
-		//pa smo onda vratili new Date(0)
-		// Ako dobije null - tj nismo nista unjeli na polja datuma vrtimo prazan string ""
-		private static String formatiranjeDatuma(Date time) {
-			// TODO Auto-generated method stub
-			if(time != null) {
-				
-				String year = dateFormatYear.format(time);
-				if(year.contains("1970")) {
-					return "";
-					
-				}else {
-					Date datum = time != null ? time : new Date();
-					return dateFormat.format(datum);
-				}
-			}else {
+
+	// Datum primimo ako je 1970 znači da je metoda za formatiranje datum iz string
+	// bacila number exception
+	// pa smo onda vratili new Date(0)
+	// Ako dobije null - tj nismo nista unjeli na polja datuma vrtimo prazan string
+	// ""
+	private static String formatiranjeDatuma(Date time) {
+		// TODO Auto-generated method stub
+		if (time != null) {
+
+			String year = dateFormatYear.format(time);
+			if (year.contains("1970")) {
 				return "";
+
+			} else {
+				Date datum = time != null ? time : new Date();
+				return dateFormat.format(datum);
 			}
-			
-			
+		} else {
+			return "";
 		}
 
+	}
 
-		private static Long formatiranjeStringLongDatum(String datumIzBaze) {
-			
-		  
-		  try {
-	          return Long.parseLong(datumIzBaze);
-	      } catch (NumberFormatException exception) {
-	          // Output expected NumberFormatException.
-	    	  //TODO Napraviti Logging
-	          System.out.println("datum nije u formatu long");
-	          return new Long(0);
-	      }
-		  
+	private static Long formatiranjeStringLongDatum(String datumIzBaze) {
+
+		try {
+			return Long.parseLong(datumIzBaze);
+		} catch (NumberFormatException exception) {
+			// Output expected NumberFormatException.
+			// TODO Napraviti Logging
+			System.out.println("datum nije u formatu long");
+			return new Long(0);
 		}
+
+	}
 	
 }
