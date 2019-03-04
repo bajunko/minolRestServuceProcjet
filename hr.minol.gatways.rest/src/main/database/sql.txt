@@ -5,7 +5,7 @@ create table minol.FORMBLATTEINS(
 	LGNR character varying(100),
 	ANSPRECHPERSON character varying(100),
 	TELNRANSPRECHENPERSON character varying(100),
-	MOBILFUNKVERBINDUNGVORHANDEN boolean,
+	MOBILFUNKVERBINDUNGVORHANDEN character varying(100),
 	BEGEHUNGSDATUM timestamp ,
 	BAUSUBSTANZ character varying(20),
 	AUFTRAGSNUMMER character varying(20),
@@ -33,8 +33,8 @@ create table minol.FORMBLATTEINS(
 	MONTAGEORTDESGATEWAYSHAUSNUMMER character varying(100),
 	MONTAGEORTDESGATEWAYSRAUMBEZEICHUNG character varying(100),
 	USERNAME character varying(100),
-	STECKDOSEBEREITSVORHANDEN boolean,
-	BOHRSCHABLONEANGEBRACT boolean,
+	STECKDOSEBEREITSVORHANDEN character varying(100),
+	BOHRSCHABLONEANGEBRACT character varying(100),
 	STARTDATUM timestamp,
 	pic BYTEA 
 );
@@ -93,7 +93,7 @@ create table minol.BLATTZWEILTDNR(
 	LGNR character varying(100),
 	ANSPRECHPERSON character varying(100),
 	TELNRANSPRECHENPERSON character varying(100),
-	MOBILFUNKVERBINDUNGVORHANDEN boolean,
+	MOBILFUNKVERBINDUNGVORHANDEN character varying(100),
 	BEGEHUNGSDATUM timestamp ,
 	BAUSUBSTANZ character varying(20),
 	AUFTRAGSNUMMER character varying(20),
@@ -121,8 +121,8 @@ create table minol.BLATTZWEILTDNR(
 	MONTAGEORTDESGATEWAYSHAUSNUMMER character varying(100),
 	MONTAGEORTDESGATEWAYSRAUMBEZEICHUNG character varying(100),
 	USERNAME character varying(100),
-	STECKDOSEBEREITSVORHANDEN boolean,
-	BOHRSCHABLONEANGEBRACT boolean,
+	STECKDOSEBEREITSVORHANDEN character varying(100),
+	BOHRSCHABLONEANGEBRACT character varying(100),
 	STARTDATUM timestamp,
 	/* pic BYTEA    ovaj dio ako cemo spremati sliku u obliku byte array */
 	/* Blatt 2*/
@@ -165,4 +165,4 @@ create table minol.BLATTLTDNR(
 		
 		);
 		
-		//Komentar
+	

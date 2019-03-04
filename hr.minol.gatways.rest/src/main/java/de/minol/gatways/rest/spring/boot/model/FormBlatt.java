@@ -36,7 +36,7 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	@Column(name = "telnransprechenperson")
 	private String telNrAnsprechenperson;
 	@Column(name = "mobilfunkverbindungvorhanden")
-	private boolean mobilfunkverbindungVorhanden;
+	private String mobilfunkverbindungVorhanden;
 	@Column(name = "begehungsdatum")
 	@Temporal( TemporalType.TIMESTAMP)
 	private Date begehungsdatum;
@@ -95,9 +95,9 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	private String montageortDesGatewaysRaumbezeichung;
 	
 	@Column(name = "steckdosebereitsvorhanden")
-	private boolean steckdoseBereitsVorhanden;
+	private String steckdoseBereitsVorhanden;
 	@Column(name = "bohrschabloneangebract")
-	private boolean bohrschabloneAngebract;
+	private String bohrschabloneAngebract;
 	@Column(name = "username")
 	private boolean username;
 	
@@ -272,10 +272,10 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	public void setTelNrAnsprechenperson(String telNrAnsprechenperson) {
 		this.telNrAnsprechenperson = telNrAnsprechenperson;
 	}
-	public boolean isMobilfunkverbindungVorhanden() {
+	public String getMobilfunkverbindungVorhanden() {
 		return mobilfunkverbindungVorhanden;
 	}
-	public void setMobilfunkverbindungVorhanden(boolean mobilfunkverbindungVorhanden) {
+	public void setMobilfunkverbindungVorhanden(String mobilfunkverbindungVorhanden) {
 		this.mobilfunkverbindungVorhanden = mobilfunkverbindungVorhanden;
 	}
 	public Date getBegehungsdatum() {
@@ -419,16 +419,16 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	public void setMontageortDesGatewaysRaumbezeichung(String montageortDesGatewaysRaumbezeichung) {
 		this.montageortDesGatewaysRaumbezeichung = montageortDesGatewaysRaumbezeichung;
 	}
-	public boolean isSteckdoseBereitsVorhanden() {
+	public String getSteckdoseBereitsVorhanden() {
 		return steckdoseBereitsVorhanden;
 	}
-	public void setSteckdoseBereitsVorhanden(boolean steckdoseBereitsVorhanden) {
+	public void setSteckdoseBereitsVorhanden(String steckdoseBereitsVorhanden) {
 		this.steckdoseBereitsVorhanden = steckdoseBereitsVorhanden;
 	}
-	public boolean isBohrschabloneAngebract() {
+	public String getBohrschabloneAngebract() {
 		return bohrschabloneAngebract;
 	}
-	public void setBohrschabloneAngebract(boolean bohrschabloneAngebract) {
+	public void setBohrschabloneAngebract(String bohrschabloneAngebract) {
 		this.bohrschabloneAngebract = bohrschabloneAngebract;
 	}
 	public String getWeitereMessstellen1() {

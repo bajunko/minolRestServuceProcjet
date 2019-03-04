@@ -119,7 +119,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Power]]></text>
+				<text><![CDATA[LED status
+Power]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="616" y="0" width="61" height="36" uuid="ca9e1e9f-da2c-4e2d-a79a-e8c2af4913ee"/>
@@ -132,7 +133,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[LoRa]]></text>
+				<text><![CDATA[LED status
+LoRa]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="677" y="0" width="65" height="36" uuid="127b9890-b417-4a06-a436-4bc5645469fb"/>
@@ -145,7 +147,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[USB]]></text>
+				<text><![CDATA[LED status
+USB]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="742" y="0" width="60" height="36" uuid="fa807101-202f-4e57-a890-80fd1d1d744e"/>

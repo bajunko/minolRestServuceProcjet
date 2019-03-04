@@ -6,13 +6,10 @@ import static ch.lambdaj.Lambda.sort;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.NumberUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.util.StringUtil;
 
 import de.minol.gatways.rest.spring.boot.model.BlattLtdnr;
 import de.minol.gatways.rest.spring.boot.model.FormBlatt;
@@ -88,7 +85,7 @@ public class IspisBlatt {
 		this.lgNr = "LG-Nr.: " + formatiranjePropertija(blatt.getLgNr());
 		this.ansprechperson = "Ansprechperson: " + formatiranjePropertija( blatt.getAnsprechperson());
 		this.telNrAnsprechenperson = "Tel-Nr. Ansprechenperson: " + formatiranjePropertija( blatt.getTelNrAnsprechenperson());
-		this.mobilfunkverbindungVorhanden = "Mobilfunkverbindung vorhanden: " + formatiranjeJaOderNein( blatt.isMobilfunkverbindungVorhanden());
+		this.mobilfunkverbindungVorhanden = "Mobilfunkverbindung vorhanden: " +  formatiranjeJaOderNein( blatt.getMobilfunkverbindungVorhanden());
 		this.begehungsdatum = "Begehungsdatum: " + formatiranjeDatuma( blatt.getBegehungsdatum());
 		this.bausubstanz = "Bausubstanz: " + formatiranjePropertija( blatt.getBausubstanz() != null ? blatt.getBausubstanz().getOpis() : "");
 		this.auftragsnummer = "Auftragsnummer: " + formatiranjePropertija( blatt.getAuftragsnummer());
@@ -123,9 +120,9 @@ public class IspisBlatt {
 		this.montageortDesGatewaysRaumbezeichung = "Raumbezeichung: " + formatiranjePropertija( blatt.getMontageortDesGatewaysRaumbezeichung());
 //		
 //		private boolean steckdoseBereitsVorhanden;
-		this.steckdoseBereitsVorhanden = "Steckdose bereits vorhanden: " + formatiranjeJaOderNein( blatt.isSteckdoseBereitsVorhanden());
+		this.steckdoseBereitsVorhanden = "Steckdose bereits vorhanden: " +  formatiranjeJaOderNein( blatt.getSteckdoseBereitsVorhanden());
 //		private boolean bohrschabloneAngebract;
-		this.bohrschabloneAngebract = "Bohrschablone angebract: " + formatiranjeJaOderNein( blatt.isBohrschabloneAngebract());
+		this.bohrschabloneAngebract = "Bohrschablone angebract: " + formatiranjeJaOderNein( blatt.getBohrschabloneAngebract());
 		
 		this.auftragsNumer = "Auftragsnummer: " + formatiranjePropertija( blatt.getAuftragsNumer());
 		this.lgNrGateway = "Lg-Nr. Gateway: " + formatiranjePropertija( blatt.getLgNrGateway());
@@ -195,9 +192,15 @@ public class IspisBlatt {
 	}
 
 
-	private String formatiranjeJaOderNein(boolean mobil) {
-		String jaOderNein = mobil == true ? "Ja" : "Nein";
-		return jaOderNein;
+	private String formatiranjeJaOderNein(String mobil) {
+		
+		if(StringUtils.contains(mobil, "true")) {
+			return "JA";
+		}else if (StringUtils.contains(mobil, "false")){
+			return "NEIN";
+		}else {
+			return "";
+		}
 	}
 
 

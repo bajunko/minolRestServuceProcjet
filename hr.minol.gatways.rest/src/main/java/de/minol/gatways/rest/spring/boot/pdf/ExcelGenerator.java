@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
@@ -26,7 +27,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import de.minol.gatways.rest.spring.boot.model.BlattLtdnr;
 import de.minol.gatways.rest.spring.boot.model.FormBlatt;
 import de.minol.gatways.rest.spring.boot.model.FormBlattEins;
-import de.minol.gatways.rest.spring.boot.pdf.model.IspisBlattLtdnr;
 
 public class ExcelGenerator {
 
@@ -151,7 +151,7 @@ public class ExcelGenerator {
 
 			row.createCell(j++).setCellValue(blatt.getAnsprechperson());
 			row.createCell(j++).setCellValue(blatt.getTelNrAnsprechenperson());
-			row.createCell(j++).setCellValue(blatt.isMobilfunkverbindungVorhanden() ? "JA" : "NEIN");
+			row.createCell(j++).setCellValue(formatiranjeJaOderNein(blatt.getMobilfunkverbindungVorhanden()));
 
 			row.createCell(j++).setCellValue(
 					blatt.getAussenbereichVorderseite() != null ? blatt.getAussenbereichVorderseite().getOpis() : "");
@@ -215,8 +215,8 @@ public class ExcelGenerator {
 			row.createCell(j++).setCellValue(blatt.getMontageortDesGatewaysAdresse());
 			row.createCell(j++).setCellValue(blatt.getMontageortDesGatewaysHausnummer());
 			row.createCell(j++).setCellValue(blatt.getMontageortDesGatewaysRaumbezeichung());
-			row.createCell(j++).setCellValue(blatt.isSteckdoseBereitsVorhanden() ? "JA" : "NEIN");
-			row.createCell(j++).setCellValue(blatt.isBohrschabloneAngebract() ? "JA" : "NEIN");
+			row.createCell(j++).setCellValue( formatiranjeJaOderNein(blatt.getSteckdoseBereitsVorhanden()));
+			row.createCell(j++).setCellValue(formatiranjeJaOderNein(blatt.getBohrschabloneAngebract()));
 
 		}
 
@@ -242,9 +242,9 @@ public class ExcelGenerator {
 		columnsBlatt2.add("Lage");
 		columnsBlatt2.add("Montage-position / Raum");
 		columnsBlatt2.add("Montageart");
-		columnsBlatt2.add("Power");
-		columnsBlatt2.add("LoRa");
-		columnsBlatt2.add("USB");
+		columnsBlatt2.add("LED status Power");
+		columnsBlatt2.add("LED status LoRa");
+		columnsBlatt2.add("ULED status USB");
 		columnsBlatt2.add("SAP-Nr");
 
 		columnsBlatt2.add("Bemerkungen\nzur Montage");
@@ -364,6 +364,18 @@ public class ExcelGenerator {
 			return new Long(0);
 		}
 
+	}
+	
+	
+	private static String formatiranjeJaOderNein(String mobil) {
+		
+		if(StringUtils.contains(mobil, "true")) {
+			return "JA";
+		}else if (StringUtils.contains(mobil, "false")){
+			return "NEIN";
+		}else {
+			return "";
+		}
 	}
 	
 }
