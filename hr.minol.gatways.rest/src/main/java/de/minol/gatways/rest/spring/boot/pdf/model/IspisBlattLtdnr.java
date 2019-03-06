@@ -25,7 +25,9 @@ public class IspisBlattLtdnr{
 		this.abwAnscriftHauseingang = ltdnr.getAbwAnscriftHauseingang();
 		this.geschloss = ltdnr.getGeschloss().getOpis();
 		this.lage = ltdnr.getLage().getOpis();
-		this.montagePositionRaum = ltdnr.getMontagePositionRaum().getOpis();
+		String positionHinweis = ltdnr.getMontagePositionRaumhinweis() != null 
+				? ltdnr.getMontagePositionRaumhinweis() : "";
+		this.montagePositionRaum = ltdnr.getMontagePositionRaum().getOpis() + " " + positionHinweis;
 		this.montageort = ltdnr.getMontageort().getOpis();
 		this.power = ltdnr.getPower().getOpis();
 		this.lora = ltdnr.getLora().getOpis();

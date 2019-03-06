@@ -1,10 +1,12 @@
 package de.minol.gatways.rest.spring.boot.controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -45,7 +47,7 @@ public class BlattController {
 	
 	@RequestMapping("/")
 	public String healthCheck()	{
-		return "REST radi ok - verzija PDF";
+		return "REST radi ok - verzija PDF - dodatk hinweis";
 	}
 	
 	@GetMapping("/blattEins")
@@ -238,10 +240,14 @@ public class BlattController {
         
         
         byte[] printReport = reportFactorry.printReport(eins);
+        
+        
+        
         ByteArrayInputStream bisJasper = new ByteArrayInputStream(printReport);
         Long timestamp = new Date().getTime();
         String nazivFilla = "Blatt_" + timestamp.toString();
  
+       // spremiPdfNaServer(printReport, nazivFilla);
         org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
         headers.add("Content-Disposition", "inline; filename="+ nazivFilla + ".pdf");
  
@@ -252,6 +258,18 @@ public class BlattController {
                 .body(new InputStreamResource(bisJasper));
     }
 	
+	private void spremiPdfNaServer(byte[] pdf, String naziv) {
+		
+		File filePdf = new File("root/Minol/" + naziv +".pdf");
+		try {
+			FileUtils.writeByteArrayToFile(filePdf, pdf);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
 	//Primjer sa Jasper Reportom
 	@GetMapping(value = "blattjasperexcel")
 	public ResponseEntity<InputStreamResource> blattReportJasperExcel(FormBlatt eins) throws IOException {

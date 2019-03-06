@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14b52e31-04a3-41a1-9800-1d5f03d2f243">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="653"/>
 	<parameter name="blatt" class="de.minol.gatways.rest.spring.boot.pdf.model.IspisBlatt"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Ante\\Razvoj\\Java\\MinolGatewaysRest\\git\\minolRestServuceProcjet\\hr.minol.gatways.rest\\src\\main\\resources\\"]]></defaultValueExpression>
@@ -372,7 +372,7 @@
 		</band>
 		<band height="130">
 			<staticText>
-				<reportElement x="10" y="36" width="176" height="18" uuid="f5af3964-2d6e-460a-9a1a-8f4ae1752a4b"/>
+				<reportElement x="2" y="36" width="176" height="18" uuid="f5af3964-2d6e-460a-9a1a-8f4ae1752a4b"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>

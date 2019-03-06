@@ -46,6 +46,22 @@ public class BlattLtdnr {
 	private String usb;
 	@Column(name = "sapnr")
 	private String sapNr;
+	//Dodatne napomene za svako polje koje dropdown - koje su u modelu enumeracija
+	// Hinweis
+	@Column(name = "geschlosshinweis")
+	private String geschlosshinweis;
+	@Column(name = "lagehinweis")
+	private String lagehinweis;
+	@Column(name = "montagepositionraumhinweis")
+	private String montagePositionRaumhinweis;
+	@Column(name = "montageorthinweis")
+	private String montageorthinweis;
+	@Column(name = "powerhinweis")
+	private String powerhinweis;
+	@Column(name = "lorahinweis")
+	private String lorahinweis;
+	@Column(name = "usbhinweis")
+	private String usbhinweis;
 	
 //	 @Column(name = "formblattzwei_id")
 //     private String formblattzwei_id;
@@ -164,6 +180,48 @@ public class BlattLtdnr {
 	}
 	public void setFormblatt_id(Long formblatt_id) {
 		this.formblatt_id = formblatt_id;
+	}
+	public String getGeschlosshinweis() {
+		return geschlosshinweis;
+	}
+	public void setGeschlosshinweis(String geschlosshinweis) {
+		this.geschlosshinweis = geschlosshinweis;
+	}
+	public String getLagehinweis() {
+		return lagehinweis;
+	}
+	public void setLagehinweis(String lagehinweis) {
+		this.lagehinweis = lagehinweis;
+	}
+	public String getMontagePositionRaumhinweis() {
+		return montagePositionRaumhinweis;
+	}
+	public void setMontagePositionRaumhinweis(String montagePositionRaumhinweis) {
+		this.montagePositionRaumhinweis = montagePositionRaumhinweis;
+	}
+	public String getMontageorthinweis() {
+		return montageorthinweis;
+	}
+	public void setMontageorthinweis(String montageorthinweis) {
+		this.montageorthinweis = montageorthinweis;
+	}
+	public String getPowerhinweis() {
+		return powerhinweis;
+	}
+	public void setPowerhinweis(String powerhinweis) {
+		this.powerhinweis = powerhinweis;
+	}
+	public String getLorahinweis() {
+		return lorahinweis;
+	}
+	public void setLorahinweis(String lorahinweis) {
+		this.lorahinweis = lorahinweis;
+	}
+	public String getUsbhinweis() {
+		return usbhinweis;
+	}
+	public void setUsbhinweis(String usbhinweis) {
+		this.usbhinweis = usbhinweis;
 	}
 		
 		
