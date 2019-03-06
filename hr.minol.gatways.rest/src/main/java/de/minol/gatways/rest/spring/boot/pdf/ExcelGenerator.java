@@ -301,8 +301,11 @@ public class ExcelGenerator {
 					row.createCell(j++)
 							.setCellValue(ltdNr.getGeschloss() != null ? ltdNr.getGeschloss().getOpis() : "");
 					row.createCell(j++).setCellValue(ltdNr.getLage() != null ? ltdNr.getLage().getOpis() : "");
+					String space = (StringUtils.isNotEmpty(ltdNr.getMontagePositionRaum().getOpis()) && 
+							 StringUtils.isNotEmpty(ltdNr.getMontagePositionRaumhinweis())) ? " - " : "";
 					row.createCell(j++).setCellValue(
-							ltdNr.getMontagePositionRaum() != null ? ltdNr.getMontagePositionRaum().getOpis() : "");
+							ltdNr.getMontagePositionRaum() != null ? ltdNr.getMontagePositionRaum().getOpis()  : ""  + space + 
+									ltdNr.getMontagePositionRaumhinweis() != null ? ltdNr.getMontagePositionRaumhinweis() : "");
 					row.createCell(j++)
 							.setCellValue(ltdNr.getMontageort() != null ? ltdNr.getMontageort().getOpis() : "");
 					row.createCell(j++).setCellValue(ltdNr.getPower() != null ? ltdNr.getPower().getOpis() : "");
