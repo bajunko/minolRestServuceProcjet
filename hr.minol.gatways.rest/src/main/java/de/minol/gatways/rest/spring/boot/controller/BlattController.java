@@ -47,7 +47,7 @@ public class BlattController {
 	
 	@RequestMapping("/")
 	public String healthCheck()	{
-		return "REST radi ok - verzija PDF - dodatk hinweis";
+		return "REST radi ok - verzija PDF - dodatk hinweis verzija prod";
 	}
 	
 	@GetMapping("/blattEins")
