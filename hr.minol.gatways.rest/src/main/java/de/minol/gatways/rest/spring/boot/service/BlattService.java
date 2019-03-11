@@ -15,11 +15,13 @@ import de.minol.gatways.rest.spring.boot.model.BlattZweiLtdnr;
 import de.minol.gatways.rest.spring.boot.model.FormBlatt;
 import de.minol.gatways.rest.spring.boot.model.FormBlattEins;
 import de.minol.gatways.rest.spring.boot.model.FormBlattZwei;
+import de.minol.gatways.rest.spring.boot.model.Users;
 import de.minol.gatways.rest.spring.boot.repository.BlattLtdnrRepository;
 import de.minol.gatways.rest.spring.boot.repository.BlattZweiLtdnrRepository;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattEinsRepository;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattRepository;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattZweiRepository;
+import de.minol.gatways.rest.spring.boot.repository.UsersRepository;
 
 @Service
 public class BlattService {
@@ -35,11 +37,18 @@ public class BlattService {
 	   private FormBlattRepository formBlattRepository;
 	   @Autowired
 	   private BlattLtdnrRepository blattLtdnrRepository;
+	   @Autowired
+	   private UsersRepository usersRepository;
 	  
 	  
 	    @Transactional
 		public boolean addBlattEins(FormBlattEins blattEins) {
 			return formBlattEinsRepository.save(blattEins) != null;
+		}
+	    
+	    @Transactional
+		public boolean addUsers(Users users) {
+			return usersRepository.save(users) != null;
 		}
 	    
 	    @Transactional

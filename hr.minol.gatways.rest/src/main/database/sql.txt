@@ -84,7 +84,7 @@ create table minol.BLATTZWEILTDNR(
 		);
 		
 		
-	/* Model za jednu tablicu gdje su spojeni blatt1 i blatt2	*/
+	
 	create table minol.FORMBLATT(
     ID  serial PRIMARY KEY,
     MACADRESSEBLATT1 character varying(100),
@@ -170,6 +170,17 @@ create table minol.BLATTLTDNR(
 		 PRIMARY KEY (ID),
 		 FOREIGN KEY(FORMBLATT_ID) REFERENCES minol.formblatt(id) ON DELETE CASCADE
 		
+		);
+		
+		create table minol.USERS(
+
+
+		ID serial,
+		
+		USERNAME character varying(100),
+		PASSWORD character varying(100),
+		
+		 PRIMARY KEY (ID)		
 		);
 		
 	

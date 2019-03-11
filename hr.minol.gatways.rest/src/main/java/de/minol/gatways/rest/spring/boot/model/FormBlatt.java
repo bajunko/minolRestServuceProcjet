@@ -99,7 +99,7 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	@Column(name = "bohrschabloneangebract")
 	private String bohrschabloneAngebract;
 	@Column(name = "username")
-	private boolean username;
+	private String username;
 	
    
 	@Column(name = "auftragsnumer")
@@ -467,5 +467,13 @@ private final static String descriptionGatewayNummer = "MAC Addresse nur vollsta
 	public void setMacAdresseBlatt1(String macAdresseBlatt1) {
 		this.macAdresseBlatt1 = macAdresseBlatt1;
 	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	
 	
 }

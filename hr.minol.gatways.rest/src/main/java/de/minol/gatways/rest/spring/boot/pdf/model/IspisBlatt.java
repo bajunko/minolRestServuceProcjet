@@ -60,7 +60,7 @@ public class IspisBlatt {
 	private String montageortDesGatewaysRaumbezeichung;
 	private String steckdoseBereitsVorhanden;
 	private String bohrschabloneAngebract;
-	private boolean username;
+	private String username;
     private String auftragsNumer;
 	private String lgNrGateway;
 	private String plz;
@@ -80,6 +80,7 @@ public class IspisBlatt {
 	
 	public IspisBlatt(FormBlatt blatt) {
 		
+		this.username = "Username: " + formatiranjePropertija( blatt.getUsername());
 		this.macAdresseBlatt1 = "MAC Adresse Blatt Eins: " + formatiranjePropertija( blatt.getMacAdresseBlatt1());
 		this.adresseDesObjektes = "Adresse Des Objektes: " + formatiranjePropertija( blatt.getAdresseDesObjektes());
 		this.lgNr = "LG-Nr.: " + formatiranjePropertija(blatt.getLgNr());
@@ -331,7 +332,7 @@ public class IspisBlatt {
 	public String isBohrschabloneAngebract() {
 		return bohrschabloneAngebract;
 	}
-	public boolean isUsername() {
+	public String getUsername() {
 		return username;
 	}
 	public String getAuftragsNumer() {

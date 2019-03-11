@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14b52e31-04a3-41a1-9800-1d5f03d2f243">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="653"/>
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="16"/>
+	<property name="ireport.y" value="889"/>
 	<parameter name="blatt" class="de.minol.gatways.rest.spring.boot.pdf.model.IspisBlatt"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Ante\\Razvoj\\Java\\MinolGatewaysRest\\git\\minolRestServuceProcjet\\hr.minol.gatways.rest\\src\\main\\resources\\"]]></defaultValueExpression>
@@ -370,7 +370,7 @@
 				<subreportExpression><![CDATA["report_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="130">
+		<band height="146">
 			<staticText>
 				<reportElement x="2" y="36" width="176" height="18" uuid="f5af3964-2d6e-460a-9a1a-8f4ae1752a4b"/>
 				<box>
@@ -401,7 +401,7 @@
 				<textFieldExpression><![CDATA[$P{blatt}.getBeiHybridInstallationLMontagepositionDerAntenne()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="511" y="104" width="290" height="15" uuid="8019944a-4f14-4d41-bb87-23fe92ead308"/>
+				<reportElement x="511" y="123" width="290" height="15" uuid="8019944a-4f14-4d41-bb87-23fe92ead308"/>
 				<box leftPadding="2" bottomPadding="2"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
@@ -423,6 +423,14 @@
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{blatt}.getBeiHybridInstallationLfdNrDesGateways()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="512" y="108" width="290" height="15" uuid="1c5d2831-3f0d-4bc2-be50-83f2de90eb42"/>
+				<box leftPadding="2" bottomPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{blatt}.getUsername()]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

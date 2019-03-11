@@ -3,8 +3,10 @@ package de.minol.gatways.rest.spring.boot.controller;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpStatus;
@@ -24,16 +26,22 @@ import de.minol.gatways.rest.spring.boot.model.BlattZweiLtdnr;
 import de.minol.gatways.rest.spring.boot.model.FormBlatt;
 import de.minol.gatways.rest.spring.boot.model.FormBlattEins;
 import de.minol.gatways.rest.spring.boot.model.FormBlattZwei;
+import de.minol.gatways.rest.spring.boot.model.Users;
 import de.minol.gatways.rest.spring.boot.pdf.ExcelGenerator;
 import de.minol.gatways.rest.spring.boot.pdf.ReportFactory;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattEinsRepository;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattRepository;
 import de.minol.gatways.rest.spring.boot.repository.FormBlattZweiRepository;
+import de.minol.gatways.rest.spring.boot.repository.UsersRepository;
 import de.minol.gatways.rest.spring.boot.service.BlattService;
 
 @RestController
 public class BlattController {
 	
+	SimpleDateFormat sdfTime = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
+	
+	@Autowired
+	UsersRepository usersRepository;
 	@Autowired
 	FormBlattEinsRepository formBlattEinsRepository;
 	@Autowired
@@ -49,6 +57,16 @@ public class BlattController {
 	public String healthCheck()	{
 		return "REST radi ok - verzija PDF - dodatk hinweis verzija prod";
 	}
+	
+	@GetMapping("/blattUsers")
+	public List<Users> allBlattUsers(){
+		return (List<Users>) usersRepository.findAll();
+	}
+	
+	@RequestMapping(value = "/insertUser", method = RequestMethod.POST)
+	public int insertUser(@RequestBody Users user) {
+		return blattService.addUsers(user) ? HttpStatus.SC_CREATED : HttpStatus.SC_BAD_REQUEST;
+	}	
 	
 	@GetMapping("/blattEins")
 	public List<FormBlattEins> allBlattEins(){
@@ -245,11 +263,11 @@ public class BlattController {
         
         ByteArrayInputStream bisJasper = new ByteArrayInputStream(printReport);
         Long timestamp = new Date().getTime();
-        String nazivFilla = "Blatt_" + timestamp.toString();
+        String nazivFilla = "Blatt_"  + sdfTime.format(eins.getStartdatum());
  
-       // spremiPdfNaServer(printReport, nazivFilla);
         org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
         headers.add("Content-Disposition", "inline; filename="+ nazivFilla + ".pdf");
+         spremiPdfNaServer(printReport, nazivFilla);
  
         return ResponseEntity
                 .ok()
@@ -259,11 +277,20 @@ public class BlattController {
     }
 	
 	private void spremiPdfNaServer(byte[] pdf, String naziv) {
+		//Putanja za spremanj do u putanje za Apache html server
+		//    /var/www/html/gateways/pdf/
+		String apacheHttpServer = "/var/www/html/gateways/pdf/";
 		
-		File filePdf = new File("root/Minol/" + naziv +".pdf");
+		//Putanja za spremanje do simple HTTP server
+		//   /home/gateways/
+		String simplePytonHttpServer = "/home/gateways/";
+		
+		File filePdf = new File(apacheHttpServer + naziv +".pdf");
 		try {
 			FileUtils.writeByteArrayToFile(filePdf, pdf);
+			System.out.println("Napravljen PDF za spremanje na server " + filePdf.getAbsolutePath() + " " + filePdf.getPath());
 		} catch (IOException e) {
+			System.out.println("Greska PDF za spremanje na server "+ filePdf.getAbsolutePath() + " " + filePdf.getPath());
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
