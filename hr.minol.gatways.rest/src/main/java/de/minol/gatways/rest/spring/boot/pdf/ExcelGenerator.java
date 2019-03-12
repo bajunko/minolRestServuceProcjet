@@ -301,6 +301,12 @@ public class ExcelGenerator {
 						row.createCell(4).setCellValue(blatt.getPlz());
 						row.createCell(5).setCellValue(blatt.getOrt());
 						row.createCell(6).setCellValue(blatt.getStrasse());
+						row.createCell(18).setCellValue(blatt.getBemerkungenZurMontage());
+						row.createCell(19).setCellValue(blatt.getBeiHybridInstallationLfdNrDesGateways());
+						row.createCell(20).setCellValue(blatt.getBeiHybridInstallationLMontagepositionDerAntenne());
+						row.createCell(21).setCellValue(blatt.getBeiHybridInstallationSonstigeBemerkung());
+						row.createCell(22).setCellValue(blatt.getUsername());
+						row.createCell(23).setCellValue(formatiranjeDatuma(blatt.getStartdatum()));
 						j = j - 11;
 					}
 					row.createCell(j++).setCellValue(ltdNr.getLtdnr());
