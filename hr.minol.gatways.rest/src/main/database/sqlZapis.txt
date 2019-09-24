@@ -1,0 +1,26 @@
+create table multimedija.ZAPIS(
+    ID  serial PRIMARY KEY,
+    TEXT character varying(100),
+	SLIKA character varying(100),
+	GEOLOAKCIJA character varying(100),
+	VIDEO character varying(100),
+	ZVUK character varying(100),
+    USERNAME character varying(100),
+	STARTDATUM timestamp,
+	SLIKA BYTEA
+	
+);
+
+		
+		create table multimedija.USERS(
+
+
+		ID serial,
+		
+		USERNAME character varying(100),
+		PASSWORD character varying(100),
+		
+		 PRIMARY KEY (ID)		
+		);
+		
+	
