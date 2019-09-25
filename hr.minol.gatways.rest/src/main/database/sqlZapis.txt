@@ -1,13 +1,12 @@
 create table multimedija.ZAPIS(
     ID  serial PRIMARY KEY,
     TEXT character varying(100),
-	SLIKA character varying(100),
+	SLIKA bytea,
 	GEOLOAKCIJA character varying(100),
 	VIDEO character varying(100),
 	ZVUK character varying(100),
     USERNAME character varying(100),
-	STARTDATUM timestamp,
-	SLIKA BYTEA
+	VRIJEMEUNOSA bigserial
 	
 );
 
