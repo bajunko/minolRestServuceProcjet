@@ -22,4 +22,22 @@ create table multimedija.ZAPIS(
 		 PRIMARY KEY (ID)		
 		);
 		
+		
+		create table multimedija.FOLDER(
+    ID  serial PRIMARY KEY,
+    NAZIV character varying(100)
+    
+	
+	
+);
+
+
+create table multimedija.FILE(
+    ID  serial PRIMARY KEY,
+    NAME character varying(100),
+        contenttype character varying(100),
+        content_ize bigserial
+    
+);
+		
 	
