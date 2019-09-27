@@ -44,7 +44,8 @@ import de.minol.gatways.rest.spring.boot.service.ZapisService;
 @RestController
 public class FolderController {
 	
-	private static String UPLOADED_FOLDER = "c:\\Users\\Ante\\Razvoj\\Java\\RestMultipart\\git_h2\\Spring-Boot-FIle-Upload-Rest-Service\\";
+//	private static String UPLOADED_FOLDER = "c:\\Users\\Ante\\Razvoj\\Java\\RestMultipart\\git_h2\\Spring-Boot-FIle-Upload-Rest-Service\\";
+	private static String UPLOADED_FOLDER = "/var/www/html/restapi/";
 	private final Logger logger = LoggerFactory.getLogger(FolderController.class);
 	SimpleDateFormat sdfTime = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
 	
@@ -95,7 +96,7 @@ public class FolderController {
 		
 		
 		boolean mkdirs;
-		mkdirs = new File(folder.getNaziv()).mkdirs();
+		mkdirs = new File(UPLOADED_FOLDER + folder.getNaziv()).mkdirs();
 		
 		
 		return zapisService.addFolder(folder) ? HttpStatus.SC_CREATED : HttpStatus.SC_BAD_REQUEST;
@@ -163,6 +164,53 @@ public class FolderController {
 				new HttpHeaders(), org.springframework.http.HttpStatus.OK);
 
 	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * Single file upload
+	 * @param uploadfile, idFolera
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/api/fileuploadid", method = RequestMethod.POST)
+	public ResponseEntity<?> uploadFileInFolderid(@RequestParam("file") MultipartFile uploadfile,
+			@RequestParam("folderId") String folderIdString,
+			final HttpServletRequest request) {
+		
+		long folderId = Long.parseLong(folderIdString);
+		//Dohvati naziv folder od id-a
+		Folder folder = folderRepository.findOne((Long)folderId);
+		String putanja = folder.getNaziv() + "/";
+
+		/** Below data is what we saving into database */
+		logger.debug("Single file upload!");
+		logger.debug("fileName : " + uploadfile.getOriginalFilename());
+		logger.debug("contentType : " + uploadfile.getContentType());
+		logger.debug("contentSize : " + uploadfile.getSize());
+
+		if (uploadfile.isEmpty()) {
+			return new ResponseEntity<String>("please select a file!", org.springframework.http.HttpStatus.OK);
+		}
+
+		try {
+			/** File will get saved to file system and database */
+			saveUploadedFiles(Arrays.asList(uploadfile), putanja);
+		} catch (IOException e) {
+			return new ResponseEntity<>(org.springframework.http.HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<String>("Successfully uploaded - " + uploadfile.getOriginalFilename(),
+				new HttpHeaders(), org.springframework.http.HttpStatus.OK);
+
+	}
+	
+	
+	
+	
 
 	/**
 	 * Multiple files to upload
@@ -214,8 +262,13 @@ public class FolderController {
 			if (file.isEmpty()) {
 				continue; 
 			}
+			
+		    String put = UPLOADED_FOLDER + putanja;
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get(putanja + file.getOriginalFilename());
+			//Za windows
+//			Path path = Paths.get(put + "\\" +file.getOriginalFilename());
+			//Za linux
+			Path path = Paths.get(put  +file.getOriginalFilename());
 			Files.write(path, bytes);
 			saveMetaData(file);
 
