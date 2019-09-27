@@ -44,8 +44,8 @@ import de.minol.gatways.rest.spring.boot.service.ZapisService;
 @RestController
 public class FolderController {
 	
-//	private static String UPLOADED_FOLDER = "c:\\Users\\Ante\\Razvoj\\Java\\RestMultipart\\git_h2\\Spring-Boot-FIle-Upload-Rest-Service\\";
-	private static String UPLOADED_FOLDER = "/var/www/html/restapi/";
+	private static String UPLOADED_FOLDER = "c:\\Users\\Ante\\Razvoj\\Java\\RestMultipart\\git_h2\\Spring-Boot-FIle-Upload-Rest-Service\\";
+//	private static String UPLOADED_FOLDER = "/var/www/html/restapi/";
 	private final Logger logger = LoggerFactory.getLogger(FolderController.class);
 	SimpleDateFormat sdfTime = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
 	
@@ -86,6 +86,12 @@ public class FolderController {
 		return  zapisRepository.findOne(id);
 	}
 
+	/**
+	 * 
+	 * @param folder gdje uzimamo naziv kako bise folder trebao zvati
+	 * @return 0 ako ne naprvi folder ili ako napravi folder onda id foldera
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/unosNovogFoldera", method = RequestMethod.POST)
 	public int insertZapis(@RequestBody Folder folder) throws IOException {
 //		ClassPathResource backImgFile = new ClassPathResource("image/comprapair.jpg");
@@ -97,9 +103,29 @@ public class FolderController {
 		
 		boolean mkdirs;
 		mkdirs = new File(UPLOADED_FOLDER + folder.getNaziv()).mkdirs();
+		int idFolder = -1;
+		
+		if(mkdirs) {
+			
+			 zapisService.addFolder(folder);
+			 Iterable<Folder> findAll = folderRepository.findAll();
+			 
+			 for (Iterator<Folder> iterator = findAll.iterator(); iterator.hasNext();) {
+				Folder folderIzBaze = iterator.next();
+				if(folderIzBaze.getNaziv().contains(folder.getNaziv())) {
+					idFolder = (int)folder.getId();
+				}
+				
+			}
+			
+			
+		}else {
+			   idFolder = 0;
+		}
 		
 		
-		return zapisService.addFolder(folder) ? HttpStatus.SC_CREATED : HttpStatus.SC_BAD_REQUEST;
+		// return zapisService.addFolder(folder) ? HttpStatus.SC_CREATED : HttpStatus.SC_BAD_REQUEST;
+		return idFolder;
 	}
 	
 	@GetMapping("/folder/{name}")
@@ -184,7 +210,7 @@ public class FolderController {
 		long folderId = Long.parseLong(folderIdString);
 		//Dohvati naziv folder od id-a
 		Folder folder = folderRepository.findOne((Long)folderId);
-		String putanja = folder.getNaziv() + "/";
+		String putanja = folder.getNaziv() + "\\";
 
 		/** Below data is what we saving into database */
 		logger.debug("Single file upload!");
@@ -270,7 +296,7 @@ public class FolderController {
 			//Za linux
 			Path path = Paths.get(put  +file.getOriginalFilename());
 			Files.write(path, bytes);
-			saveMetaData(file);
+			saveMetaData(file, put + file.getOriginalFilename());
 
 		}
 
@@ -281,11 +307,12 @@ public class FolderController {
 	 * @param file
 	 * @throws IOException
 	 */
-	private void saveMetaData(MultipartFile file) throws IOException {
+	private void saveMetaData(MultipartFile file, String link) throws IOException {
 		FileUploadMetaData metaData = new FileUploadMetaData();
 		metaData.setName(file.getOriginalFilename());
 		metaData.setContentType(file.getContentType());
 		metaData.setContentSize(file.getSize());
+		metaData.setLink(link);
 		fileUploadMetaData.save(metaData);
 	}
 	

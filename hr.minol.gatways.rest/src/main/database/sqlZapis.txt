@@ -36,7 +36,8 @@ create table multimedija.FILE(
     ID  serial PRIMARY KEY,
     NAME character varying(100),
         contenttype character varying(100),
-        content_ize bigserial
+        contentsize bigserial,
+        link varying
     
 );
 		

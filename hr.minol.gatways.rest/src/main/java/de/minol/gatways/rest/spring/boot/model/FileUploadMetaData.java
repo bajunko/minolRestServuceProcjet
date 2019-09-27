@@ -22,6 +22,9 @@ public class FileUploadMetaData {
 	
 	@Column(name = "contentsize")
 	private long contentSize;
+	
+	@Column(name = "link")
+	private String link;
 
 	public String getName() {
 		return name;
@@ -45,6 +48,22 @@ public class FileUploadMetaData {
 
 	public void setContentSize(long contentSize) {
 		this.contentSize = contentSize;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	
