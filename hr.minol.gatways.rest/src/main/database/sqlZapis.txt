@@ -37,8 +37,20 @@ create table multimedija.FILE(
     NAME character varying(100),
         contenttype character varying(100),
         contentsize bigserial,
-        link varying
+        link character varying
     
+);
+
+
+create table multimedija.NEWS(
+    ID  serial PRIMARY KEY,
+    TITLE character varying,
+        BODY character varying,
+        CATEGORY character varying,
+        GPSCOORDINATES character varying,
+        PHOTOLINKS character varying,
+        VIDEOLINKS character varying,
+        AUDIOLINKS character varying
 );
 		
 	

@@ -44,8 +44,8 @@ import de.minol.gatways.rest.spring.boot.service.ZapisService;
 @RestController
 public class FolderController {
 	
-	private static String UPLOADED_FOLDER = "c:\\Users\\Ante\\Razvoj\\Java\\RestMultipart\\git_h2\\Spring-Boot-FIle-Upload-Rest-Service\\";
-//	private static String UPLOADED_FOLDER = "/var/www/html/restapi/";
+//	private static String UPLOADED_FOLDER = "c:\\Users\\Ante\\Razvoj\\Java\\RestMultipart\\git_h2\\Spring-Boot-FIle-Upload-Rest-Service\\";
+	private static String UPLOADED_FOLDER = "/var/www/html/restapi/";
 	private final Logger logger = LoggerFactory.getLogger(FolderController.class);
 	SimpleDateFormat sdfTime = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
 	
@@ -210,7 +210,7 @@ public class FolderController {
 		long folderId = Long.parseLong(folderIdString);
 		//Dohvati naziv folder od id-a
 		Folder folder = folderRepository.findOne((Long)folderId);
-		String putanja = folder.getNaziv() + "\\";
+		String putanja = folder.getNaziv() + "/";
 
 		/** Below data is what we saving into database */
 		logger.debug("Single file upload!");
