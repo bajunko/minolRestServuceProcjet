@@ -47,10 +47,12 @@ create table multimedija.NEWS(
     TITLE character varying,
         BODY character varying,
         CATEGORY character varying,
+        DATE bigserial,
         GPSCOORDINATES character varying,
         PHOTOLINKS character varying,
         VIDEOLINKS character varying,
-        AUDIOLINKS character varying
+        AUDIOLINKS character varying,
+        ISHIDDEN bool
 );
 		
 	

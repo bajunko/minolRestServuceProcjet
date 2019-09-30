@@ -4,6 +4,7 @@ C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\model\Users.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\controller\FolderController.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\MinolGatwaysSpringBootApp.java
+C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\repository\NewsRepository.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\repository\FileUploadRepository.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\model\Zapis.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\repository\UsersRepository.java
@@ -11,4 +12,5 @@ C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\exception\RestGlobalExceptionHandler.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\exception\CustomError.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\model\FileUploadMetaData.java
+C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\model\News.java
 C:\Users\Ante\Razvoj\Java\MinolGatewaysRest\git\minolRestServuceProcjet\hr.minol.gatways.rest\src\main\java\de\minol\gatways\rest\spring\boot\repository\FolderRepository.java

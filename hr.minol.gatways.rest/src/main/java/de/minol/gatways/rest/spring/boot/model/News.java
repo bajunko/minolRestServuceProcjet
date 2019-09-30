@@ -27,6 +27,10 @@ public class News {
 		private String videolinks;
 		@Column(name = "audiolinks")
 		private long audiolinks;
+		@Column(name = "ishidden")
+		private boolean isHidden;
+		@Column(name = "date")
+		private long date;
 		
 		
 		public long getId() {
@@ -76,6 +80,18 @@ public class News {
 		}
 		public void setAudiolinks(long audiolinks) {
 			this.audiolinks = audiolinks;
+		}
+		public boolean isHidden() {
+			return isHidden;
+		}
+		public void setHidden(boolean isHidden) {
+			this.isHidden = isHidden;
+		}
+		public long getDate() {
+			return date;
+		}
+		public void setDate(long date) {
+			this.date = date;
 		}
 		
 		

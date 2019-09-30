@@ -33,10 +33,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import de.minol.gatways.rest.spring.boot.model.FileUploadMetaData;
 import de.minol.gatways.rest.spring.boot.model.Folder;
+import de.minol.gatways.rest.spring.boot.model.News;
 import de.minol.gatways.rest.spring.boot.model.Users;
 import de.minol.gatways.rest.spring.boot.model.Zapis;
 import de.minol.gatways.rest.spring.boot.repository.FileUploadRepository;
 import de.minol.gatways.rest.spring.boot.repository.FolderRepository;
+import de.minol.gatways.rest.spring.boot.repository.NewsRepository;
 import de.minol.gatways.rest.spring.boot.repository.UsersRepository;
 import de.minol.gatways.rest.spring.boot.repository.ZapisRepository;
 import de.minol.gatways.rest.spring.boot.service.ZapisService;
@@ -59,6 +61,8 @@ public class FolderController {
 	private FileUploadRepository fileUploadMetaData;
 	@Autowired
 	FolderRepository folderRepository;
+	@Autowired
+	NewsRepository newsRepository;
 	
 	
 	@RequestMapping("/")
@@ -66,10 +70,34 @@ public class FolderController {
 		return "REST API radi ok ";
 	}
 	
+	
+	// VEZANO ZA NEWS TABLICU
+	@RequestMapping(value = "/noviNews", method = RequestMethod.POST)
+	public long insertNews(@RequestBody News news) throws IOException {
+		
+		News newsUBazi = newsRepository.save(news);
+		
+		return newsUBazi != null ? newsUBazi.getId() : HttpStatus.SC_BAD_REQUEST;
+	}
+	
+	//Brisanje news po id-u
+	@DeleteMapping(value = "/brisanjeNews/{id}" )
+	public void deleteNews(@PathVariable long id ) {
+		newsRepository.delete(id);
+	}
+	
+	//Dohvaćanje News po id
+	@GetMapping("/news/{id}")
+	public News newsById(@PathVariable long id){
+		return  newsRepository.findOne(id);
+	}
+	
 	@GetMapping("/blattUsers")
 	public List<Users> allZapisUsers(){
 		return (List<Users>) usersRepository.findAll();
 	}
+	
+	
 	
 //	@RequestMapping(value = "/insertUser", method = RequestMethod.POST)
 //	public int insertUser(@RequestBody Users user) {
@@ -85,6 +113,20 @@ public class FolderController {
 	public Zapis zapisById(@PathVariable long id){
 		return  zapisRepository.findOne(id);
 	}
+	
+	//FOLDERI
+	
+	@GetMapping("/getAllFolders")
+	public List<Folder> allFolders(){
+		return (List<Folder>) folderRepository.findAll();
+	}
+	
+	// DELETE FOLDER
+	//Brisanje news po id-u
+		@DeleteMapping(value = "/deleteFolder/{id}" )
+		public void deleteFolder(@PathVariable long id ) {
+			folderRepository.delete(id);
+		}
 
 	/**
 	 * 
@@ -246,8 +288,16 @@ public class FolderController {
 	 */
 	@RequestMapping(value = "/api/upload/multiplefiles", method = RequestMethod.POST)
 	public ResponseEntity<?> uploadFileMulti(@RequestParam("files") MultipartFile[] uploadfiles, 
-			@RequestParam("path") String putanja) {
+			@RequestParam("folderId") String folderIdString) {
 		logger.debug("Multiple file upload!");
+		
+		long folderId = Long.parseLong(folderIdString);
+		//Dohvati naziv folder od id-a
+		Folder folder = folderRepository.findOne((Long)folderId);
+		String putanja = folder.getNaziv() + "\\";
+
+
+		
 		String uploadedFileName = Arrays.stream(uploadfiles).map(x -> x.getOriginalFilename())
 				.filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(" , "));
 		if (StringUtils.isEmpty(uploadedFileName)) {
